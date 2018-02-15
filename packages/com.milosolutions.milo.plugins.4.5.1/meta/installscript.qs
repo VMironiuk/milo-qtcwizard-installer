@@ -51,13 +51,13 @@ Component.prototype.createOperations = function()
         // specify target directory and target file for Linux OS    
         } else if (systemInfo.kernelType == "linux") {
             targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-                + "/.local/share/data/QtProject/qtcreator/plugins/4.5.1/libMilo.so";
+                + "/.local/share/data/QtProject/qtcreator/plugins/4.5.1";
             targetFile = targetPath + "/libMilo.so";
 
         // specify target directory and target file for Mac OS            
         } else if (systemInfo.kernelType == "darwin") {
             targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-                + "/Library/Application Support/QtProject/Qt Creator/plugins/4.5.1/libMilo.so";
+                + "/Library/Application Support/QtProject/Qt Creator/plugins/4.5.1";
             targetFile = targetPath + "/libMilo.so";
         }
         
