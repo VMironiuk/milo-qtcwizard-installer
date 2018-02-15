@@ -1,0 +1,29 @@
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/mbarcodescanner"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/mbarcodescanner
+	url = https://github.com/milosolutions/mbarcodescanner.git
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/mcharts"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/mcharts
+	url = https://github.com/milosolutions/mcharts.git
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/mrestapi"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/mrestapi
+	url = https://github.com/milosolutions/mrestapi.git
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/mconfig"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/mconfig
+	url = https://github.com/milosolutions/mconfig.git
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/msentry"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/msentry
+	url = https://github.com/milosolutions/msentry.git
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/mlog"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/mlog
+	url = https://github.com/milosolutions/mlog.git
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/mscripts"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/mscripts
+	url = https://github.com/VMironiuk/mscripts.git
+	branch = qtcwizard
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/newprojecttemplate"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/newprojecttemplate
+	url = https://github.com/VMironiuk/newprojecttemplate.git
+	branch = qtcwizard
+[submodule "packages/com.milosolutions.milo.wizard/data/milo/mcrypto"]
+	path = packages/com.milosolutions.milo.wizard/data/milo/mcrypto
+	url = https://github.com/milosolutions/mcrypto.git

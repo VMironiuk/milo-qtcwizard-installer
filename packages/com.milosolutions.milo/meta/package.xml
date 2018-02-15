@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Milo</DisplayName>
+    <Description>Wizards and plugins for Qt Creatot IDE.</Description>
+    <Version>1.0.0</Version>
+    <ReleaseDate>2018-02-15</ReleaseDate>
+    <Licenses>
+        <License name="Default Milo license" file="license.txt" />
+    </Licenses>
+    <SortingPriority>100</SortingPriority>
+</Package>

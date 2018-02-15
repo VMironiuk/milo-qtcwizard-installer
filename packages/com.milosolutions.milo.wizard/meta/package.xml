@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Qt Creator wizard for Milo Code Database</DisplayName>
+    <Description>Qt Creator wizard for projects creation by templates of Milo Code Database.</Description>
+    <Version>1.0.0</Version>
+    <ReleaseDate>2018-02-15</ReleaseDate>
+    <Default>true</Default>
+    <Script>installscript.qs</Script>
+    <SortingPriority>99</SortingPriority>
+</Package>

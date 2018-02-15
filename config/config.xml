@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Milo Qt Creator Wizard Installer</Name>
+    <Version>1.0.0</Version>
+    <Title>Milo Qt Creator Wizard Installer</Title>
+    <Publisher>Milo Solutions</Publisher>
+    <InstallerWindowIcon>icon</InstallerWindowIcon>
+    <InstallerApplicationIcon>icon</InstallerApplicationIcon>
+    <Logo>logo-transparent-small.png</Logo>
+    <ControlScript>controller.js</ControlScript>
+    <AllowSpaceInPath>false</AllowSpaceInPath>
+    <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
+    <WizardStyle>Modern</WizardStyle>
+</Installer>

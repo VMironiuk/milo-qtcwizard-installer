@@ -1,0 +1,1533 @@
+{
+    "version": 1,
+    "kind": "project",
+    "id": "A.MiloProjectTemplates.84dc9e",
+    "category": "A.MCDB",
+    "trDescription": "Milo Code Database is the place where we keep all useful pieces of code: snippets, working modules, templates. MCDB is a great way to skip all the mundane and boring code you have to write for each new project - here you get all the initial project code prepared and ready for further development.",
+    "trDisplayName": "Milo Project Templates",
+    "trDisplayCategory": "Milo Code Database",
+    "icon": "icon.png",
+    "enabled": "%{JS: [ %{Plugins} ].indexOf('QmakeProjectManager') >= 0}",
+    "options": [
+        {
+            "key": "QtQuickVersion",
+            "value": "%{JS: %{QtVersion}.qtQuickVersion}"
+        },
+        {
+            "key": "ProFileName",
+            "value": "%{JS: Util.fileName('%{ProjectDirectory}/%{ProjectName}', 'pro')}"
+        },
+        {
+            "key": "UpperCaseProjectName",
+            "value": "%{JS: '%{ProjectName}'.charAt(0).toUpperCase() + '%{ProjectName}'.slice(1)}"
+        },
+        {
+            "key": "vcsId",
+            "value": "G.Git"
+        }
+    ],
+    "pages": [
+        {
+            "trDisplayName": "Introduction and Project Location",
+            "trShortTitle": "Location",
+            "typeId": "Project"
+        },
+        {
+            "trDisplayName": "Kit Selection",
+            "trShortTitle": "Kits",
+            "typeId": "Kits",
+            "enabled": "%{JS: ! %{IsSubproject}}",
+            "data": {
+                "projectFilePath": "%{ProFileName}"
+            }
+        },
+        {
+            "trDisplayName": "Select Required Project Templates",
+            "trShortTitle": "Project Templates",
+            "typeId": "Fields",
+            "data": [
+                {
+                    "name": "NewProjectTemplateChB",
+                    "trDisplayName": "New Project Template",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "NewProjectTemplateChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "PlatformSupportLbl",
+                    "type": "Label",
+                    "enabled": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}",
+                    "data": {
+                        "wordWrap": true,
+                        "trText": "Platform support:"
+                    }
+                },
+                {
+                    "name": "AndroidChB",
+                    "trDisplayName": "Android",
+                    "type": "CheckBox",
+                    "enabled": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}",
+                    "data": {
+                        "checkedValue": "AndroidChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "MacChB",
+                    "trDisplayName": "Mac",
+                    "type": "CheckBox",
+                    "enabled": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}",
+                    "data": {
+                        "checkedValue": "MacChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "WindowsChB",
+                    "trDisplayName": "Windows",
+                    "type": "CheckBox",
+                    "enabled": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}",
+                    "data": {
+                        "checkedValue": "WindowsChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "Spcr1",
+                    "type": "Spacer",
+                    "data": {
+                        "factor": 3
+                    }
+                },
+                {
+                    "name": "MConfigChB",
+                    "trDisplayName": "Include MConfig",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "MConfigChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "MChartsChB",
+                    "trDisplayName": "Include MCharts",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "MChartsChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "MLogChB",
+                    "trDisplayName": "Include MLog",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "MLogChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "MRestAPIChB",
+                    "trDisplayName": "Include MRestAPI",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "MRestAPIChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "MSentryChB",
+                    "trDisplayName": "Include MSentry",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "MSentryChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "MCryptoChB",
+                    "trDisplayName": "Include MCrypto",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "MCryptoChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "MBarcodeScannerChB",
+                    "trDisplayName": "Include MBarcodeScanner",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "MBarcodeScannerChBChecked",
+                        "uncheckedValue": ""
+                    }
+                },
+                {
+                    "name": "MScriptsChB",
+                    "trDisplayName": "Include MScripts",
+                    "type": "CheckBox",
+                    "data": {
+                        "checkedValue": "MScriptsChBChecked",
+                        "uncheckedValue": ""
+                    }
+                }
+            ]
+        },
+        {
+            "trDisplayName": "Project Management",
+            "trShortTitle": "Summary",
+            "typeId": "MiloSummary"
+        }
+    ],
+    "generators": [
+        {
+            "typeId": "File",
+            "data": [
+                {
+                    "source": "README.md",
+                    "target": "README.md",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' !== 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/gitignore.example",
+                    "target": ".gitignore",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/gitlab-ci.yml.example",
+                    "target": ".gitlab-ci.yml",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/AUTHORS.md",
+                    "target": "AUTHORS.md",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/doc/branding/milo-doxy-footer.html",
+                    "target": "doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/doc/branding/milo-doxy-header.html",
+                    "target": "doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/doc/branding/milo-doxygen.css",
+                    "target": "doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/doc/branding/milo-doxygen.scss",
+                    "target": "doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/doc/branding/milo.js",
+                    "target": "doc/branding/milo.js",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/LICENSE-MiloCodeDB.txt",
+                    "target": "LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/license-Qt.txt",
+                    "target": "license-Qt.txt",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/AUTHORS.md",
+                    "target": "milo/mbarcodescanner/AUTHORS.md",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/camera_tricks.md",
+                    "target": "milo/mbarcodescanner/camera_tricks.md",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/branding/milo-doxy-footer.html",
+                    "target": "milo/mbarcodescanner/doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/branding/milo-doxy-header.html",
+                    "target": "milo/mbarcodescanner/doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/branding/milo-doxygen.css",
+                    "target": "milo/mbarcodescanner/doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/branding/milo-doxygen.scss",
+                    "target": "milo/mbarcodescanner/doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/branding/milo.js",
+                    "target": "milo/mbarcodescanner/doc/branding/milo.js",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/img/BarCodeScannerAndroidExample1.png",
+                    "target": "milo/mbarcodescanner/doc/img/BarCodeScannerAndroidExample1.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/img/BarCodeScannerAndroidExample2.png",
+                    "target": "milo/mbarcodescanner/doc/img/BarCodeScannerAndroidExample2.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/img/BarCodeScannerDesktopExample1.png",
+                    "target": "milo/mbarcodescanner/doc/img/BarCodeScannerDesktopExample1.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/img/BarCodeScannerDesktopExample2.png",
+                    "target": "milo/mbarcodescanner/doc/img/BarCodeScannerDesktopExample2.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/doc/img/BarCodeScannerDesktopWithRegionExample.png",
+                    "target": "milo/mbarcodescanner/doc/img/BarCodeScannerDesktopWithRegionExample.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/example/android/AndroidManifest.xml",
+                    "target": "milo/mbarcodescanner/example/android/AndroidManifest.xml",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/example/barcode_scanner.pro",
+                    "target": "milo/mbarcodescanner/example/barcode_scanner.pro",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/example/main.cpp",
+                    "target": "milo/mbarcodescanner/example/main.cpp",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/example/ui/qml/main.qml",
+                    "target": "milo/mbarcodescanner/example/ui/qml/main.qml",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/example/ui/qml/MainWindow.qml",
+                    "target": "milo/mbarcodescanner/example/ui/qml/MainWindow.qml",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/example/ui/qml/qmlresource.qrc",
+                    "target": "milo/mbarcodescanner/example/ui/qml/qmlresource.qrc",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/how_to_build.md",
+                    "target": "milo/mbarcodescanner/how_to_build.md",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/LICENSE-MiloCodeDB.txt",
+                    "target": "milo/mbarcodescanner/LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/MBarcodeCaptureFilter.cpp",
+                    "target": "milo/mbarcodescanner/MBarcodeCaptureFilter.cpp",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/MBarcodeCaptureFilter.h",
+                    "target": "milo/mbarcodescanner/MBarcodeCaptureFilter.h",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/mbarcodescanner.doxyfile",
+                    "target": "milo/mbarcodescanner/mbarcodescanner.doxyfile",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/mbarcodescanner.pri",
+                    "target": "milo/mbarcodescanner/mbarcodescanner.pri",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/MImageConverters.cpp",
+                    "target": "milo/mbarcodescanner/MImageConverters.cpp",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/MImageConverters.h",
+                    "target": "milo/mbarcodescanner/MImageConverters.h",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/patches/qzxing_build.patch",
+                    "target": "milo/mbarcodescanner/patches/qzxing_build.patch",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/patches/qzxing.patch",
+                    "target": "milo/mbarcodescanner/patches/qzxing.patch",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/README.md",
+                    "target": "milo/mbarcodescanner/README.md",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mbarcodescanner/scripts/build_barcode_libraries.sh",
+                    "target": "milo/mbarcodescanner/scripts/build_barcode_libraries.sh",
+                    "condition": "%{JS: '%{MBarcodeScannerChB}' === 'MBarcodeScannerChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/AUTHORS.md",
+                    "target": "milo/mcharts/AUTHORS.md",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/Chart.js",
+                    "target": "milo/mcharts/Chart.js",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/Chart.qml",
+                    "target": "milo/mcharts/Chart.qml",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/branding/milo-doxy-footer.html",
+                    "target": "milo/mcharts/doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/branding/milo-doxy-header.html",
+                    "target": "milo/mcharts/doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/branding/milo-doxygen.css",
+                    "target": "milo/mcharts/doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/branding/milo-doxygen.scss",
+                    "target": "milo/mcharts/doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/branding/milo.js",
+                    "target": "milo/mcharts/doc/branding/milo.js",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/img/QmlChartsAndroidExample.png",
+                    "target": "milo/mcharts/doc/img/QmlChartsAndroidExample.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/img/QmlChartsAverageTemp.png",
+                    "target": "milo/mcharts/doc/img/QmlChartsAverageTemp.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/img/QmlChartsExample.png",
+                    "target": "milo/mcharts/doc/img/QmlChartsExample.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/img/QmlChartsGoldPriceHistory.png",
+                    "target": "milo/mcharts/doc/img/QmlChartsGoldPriceHistory.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/img/QmlChartsWindowsDoughnutExample.png",
+                    "target": "milo/mcharts/doc/img/QmlChartsWindowsDoughnutExample.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/img/QmlChartsWindowsPieExample.png",
+                    "target": "milo/mcharts/doc/img/QmlChartsWindowsPieExample.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/doc/img/QmlChartsWindowsPolarExample.png",
+                    "target": "milo/mcharts/doc/img/QmlChartsWindowsPolarExample.png",
+                    "isBinary": true,
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/example/dataprovider.cpp",
+                    "target": "milo/mcharts/example/dataprovider.cpp",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/example/dataprovider.h",
+                    "target": "milo/mcharts/example/dataprovider.h",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/example/deployment.pri",
+                    "target": "milo/mcharts/example/deployment.pri",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/example/main.cpp",
+                    "target": "milo/mcharts/example/main.cpp",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/example/main.qml",
+                    "target": "milo/mcharts/example/main.qml",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/example/qml.qrc",
+                    "target": "milo/mcharts/example/qml.qrc",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/example/QmlCharts.pro",
+                    "target": "milo/mcharts/example/QmlCharts.pro",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/LICENSE-MiloCodeDB.txt",
+                    "target": "milo/mcharts/LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/MChart.qml",
+                    "target": "milo/mcharts/MChart.qml",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/mcharts.doxyfile",
+                    "target": "milo/mcharts/mcharts.doxyfile",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/mcharts.pri",
+                    "target": "milo/mcharts/mcharts.pri",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/mcharts.qrc",
+                    "target": "milo/mcharts/mcharts.qrc",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mcharts/README.md",
+                    "target": "milo/mcharts/README.md",
+                    "condition": "%{JS: '%{MChartsChB}' === 'MChartsChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/AUTHORS.md",
+                    "target": "milo/mconfig/AUTHORS.md",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/doc/branding/milo-doxy-footer.html",
+                    "target": "milo/mconfig/doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/doc/branding/milo-doxy-header.html",
+                    "target": "milo/mconfig/doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/doc/branding/milo-doxygen.css",
+                    "target": "milo/mconfig/doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/doc/branding/milo-doxygen.scss",
+                    "target": "milo/mconfig/doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/doc/branding/milo.js",
+                    "target": "milo/mconfig/doc/branding/milo.js",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/example/exampleconfig.cpp",
+                    "target": "milo/mconfig/example/exampleconfig.cpp",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/example/exampleconfig.h",
+                    "target": "milo/mconfig/example/exampleconfig.h",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/example/main.cpp",
+                    "target": "milo/mconfig/example/main.cpp",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/example/mconfig.pro",
+                    "target": "milo/mconfig/example/mconfig.pro",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/LICENSE-MiloCodeDB.txt",
+                    "target": "milo/mconfig/LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/mconfig.cpp",
+                    "target": "milo/mconfig/mconfig.cpp",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/mconfig.doxyfile",
+                    "target": "milo/mconfig/mconfig.doxyfile",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/mconfig.h",
+                    "target": "milo/mconfig/mconfig.h",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/mconfig.pri",
+                    "target": "milo/mconfig/mconfig.pri",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/README.md",
+                    "target": "milo/mconfig/README.md",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/tst_mconfig/data/miloConfTest.ini",
+                    "target": "milo/mconfig/tst_mconfig/data/miloConfTest.ini",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/tst_mconfig/submconfig.cpp",
+                    "target": "milo/mconfig/tst_mconfig/submconfig.cpp",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/tst_mconfig/submconfig.h",
+                    "target": "milo/mconfig/tst_mconfig/submconfig.h",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/tst_mconfig/testdata.qrc",
+                    "target": "milo/mconfig/tst_mconfig/testdata.qrc",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/tst_mconfig/tst_mconfig.cpp",
+                    "target": "milo/mconfig/tst_mconfig/tst_mconfig.cpp",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mconfig/tst_mconfig/tst_mconfig.pro",
+                    "target": "milo/mconfig/tst_mconfig/tst_mconfig.pro",
+                    "condition": "%{JS: '%{MConfigChB}' === 'MConfigChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/doc/branding/milo-doxy-footer.html",
+                    "target": "milo/mcrypto/doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/doc/branding/milo-doxy-header.html",
+                    "target": "milo/mcrypto/doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/doc/branding/milo-doxygen.css",
+                    "target": "milo/mcrypto/doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/doc/branding/milo-doxygen.scss",
+                    "target": "milo/mcrypto/doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/doc/branding/milo.js",
+                    "target": "milo/mcrypto/doc/branding/milo.js",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/example/example.pro",
+                    "target": "milo/mcrypto/example/example.pro",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/example/main.cpp",
+                    "target": "milo/mcrypto/example/main.cpp",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/LICENSE-MiloCodeDB.txt",
+                    "target": "milo/mcrypto/LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/mcrypto.cpp",
+                    "target": "milo/mcrypto/mcrypto.cpp",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/mcrypto.doxyfile",
+                    "target": "milo/mcrypto/mcrypto.doxyfile",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/mcrypto.h",
+                    "target": "milo/mcrypto/mcrypto.h",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/mcrypto.pri",
+                    "target": "milo/mcrypto/mcrypto.pri",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/qaesencryption.cpp",
+                    "target": "milo/mcrypto/qaesencryption.cpp",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/qaesencryption.h",
+                    "target": "milo/mcrypto/qaesencryption.h",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/README.md",
+                    "target": "milo/mcrypto/README.md",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/scripts/prepare_openssl_android.sh",
+                    "target": "milo/mcrypto/scripts/prepare_openssl_android.sh",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/scripts/prepare_openssl_common.sh",
+                    "target": "milo/mcrypto/scripts/prepare_openssl_common.sh",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/scripts/prepare_openssl_linux.sh",
+                    "target": "milo/mcrypto/scripts/prepare_openssl_linux.sh",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/scripts/setenv-android.sh.example",
+                    "target": "milo/mcrypto/scripts/setenv-android.sh.example",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/tst_mcrypto/tst_mcrypto.cpp",
+                    "target": "milo/mcrypto/tst_mcrypto/tst_mcrypto.cpp",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mcrypto/tst_mcrypto/tst_mcrypto.pro",
+                    "target": "milo/mcrypto/tst_mcrypto/tst_mcrypto.pro",
+                    "condition": "%{JS: '%{MCryptoChB}' === 'MCryptoChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/AUTHORS.md",
+                    "target": "milo/mlog/AUTHORS.md",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/doc/branding/milo-doxy-footer.html",
+                    "target": "milo/mlog/doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/doc/branding/milo-doxy-header.html",
+                    "target": "milo/mlog/doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/doc/branding/milo-doxygen.css",
+                    "target": "milo/mlog/doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/doc/branding/milo-doxygen.scss",
+                    "target": "milo/mlog/doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/doc/branding/milo.js",
+                    "target": "milo/mlog/doc/branding/milo.js",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/example-log/example-log.pro",
+                    "target": "milo/mlog/example-log/example-log.pro",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/example-log/exampleclass.h",
+                    "target": "milo/mlog/example-log/exampleclass.h",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/example-log/main.cpp",
+                    "target": "milo/mlog/example-log/main.cpp",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/LICENSE-MiloCodeDB.txt",
+                    "target": "milo/mlog/LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/mlog.cpp",
+                    "target": "milo/mlog/mlog.cpp",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/mlog.doxyfile",
+                    "target": "milo/mlog/mlog.doxyfile",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/mlog.h",
+                    "target": "milo/mlog/mlog.h",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/mlog.pri",
+                    "target": "milo/mlog/mlog.pri",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/README.md",
+                    "target": "milo/mlog/README.md",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/tst_mlog/loggingthread.cpp",
+                    "target": "milo/mlog/tst_mlog/loggingthread.cpp",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/tst_mlog/loggingthread.h",
+                    "target": "milo/mlog/tst_mlog/loggingthread.h",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/tst_mlog/tst_mlog.cpp",
+                    "target": "milo/mlog/tst_mlog/tst_mlog.cpp",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mlog/tst_mlog/tst_mlog.pro",
+                    "target": "milo/mlog/tst_mlog/tst_mlog.pro",
+                    "condition": "%{JS: '%{MLogChB}' === 'MLogChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/AUTHORS.md",
+                    "target": "milo/mrestapi/AUTHORS.md",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/doc/branding/milo-doxy-footer.html",
+                    "target": "milo/mrestapi/doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/doc/branding/milo-doxy-header.html",
+                    "target": "milo/mrestapi/doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/doc/branding/milo-doxygen.css",
+                    "target": "milo/mrestapi/doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/doc/branding/milo-doxygen.scss",
+                    "target": "milo/mrestapi/doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/doc/branding/milo.js",
+                    "target": "milo/mrestapi/doc/branding/milo.js",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/config.cpp",
+                    "target": "milo/mrestapi/example/config.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/config.h",
+                    "target": "milo/mrestapi/example/config.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/main.cpp",
+                    "target": "milo/mrestapi/example/main.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/mrBabu/address.cpp",
+                    "target": "milo/mrestapi/example/mrBabu/address.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/mrBabu/address.h",
+                    "target": "milo/mrestapi/example/mrBabu/address.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/mrBabu/addressptr.h",
+                    "target": "milo/mrestapi/example/mrBabu/addressptr.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/mrBabu/session.cpp",
+                    "target": "milo/mrestapi/example/mrBabu/session.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/mrBabu/session.h",
+                    "target": "milo/mrestapi/example/mrBabu/session.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/mrBabu/user.cpp",
+                    "target": "milo/mrestapi/example/mrBabu/user.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/mrBabu/user.h",
+                    "target": "milo/mrestapi/example/mrBabu/user.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/mrBabu/userptr.h",
+                    "target": "milo/mrestapi/example/mrBabu/userptr.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/openWeatherMap/weather.cpp",
+                    "target": "milo/mrestapi/example/openWeatherMap/weather.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/openWeatherMap/weather.h",
+                    "target": "milo/mrestapi/example/openWeatherMap/weather.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/RestAPICommunication.pro",
+                    "target": "milo/mrestapi/example/RestAPICommunication.pro",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequest.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequest.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequestconfig.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequestconfig.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequestconfig.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequestconfig.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/loginrequest.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/loginrequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/loginrequest.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/loginrequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/logoutrequest.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/logoutrequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/logoutrequest.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/logoutrequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/registerrequest.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/registerrequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/registerrequest.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/registerrequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/userinforequest.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/userinforequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/userinforequest.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/mrbaburequests/userinforequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequest.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequest.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequestconfig.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequestconfig.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequestconfig.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequestconfig.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequests/weatherbycitynamerequest.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequests/weatherbycitynamerequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequests/weatherbycitynamerequest.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/openweathermaprequests/weatherbycitynamerequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/restapiclient.cpp",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/restapiclient.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/example/restCommunicationStuff/restapiclient.h",
+                    "target": "milo/mrestapi/example/restCommunicationStuff/restapiclient.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/LICENSE-MiloCodeDB.txt",
+                    "target": "milo/mrestapi/LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/mrestapi.doxyfile",
+                    "target": "milo/mrestapi/mrestapi.doxyfile",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/mrestapi.pri",
+                    "target": "milo/mrestapi/mrestapi.pri",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/README.md",
+                    "target": "milo/mrestapi/README.md",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/restCommunicationCore/mrestrequest.cpp",
+                    "target": "milo/mrestapi/restCommunicationCore/mrestrequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/restCommunicationCore/mrestrequest.h",
+                    "target": "milo/mrestapi/restCommunicationCore/mrestrequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/restCommunicationCore/mrestrequestmanager.cpp",
+                    "target": "milo/mrestapi/restCommunicationCore/mrestrequestmanager.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/restCommunicationCore/mrestrequestmanager.h",
+                    "target": "milo/mrestapi/restCommunicationCore/mrestrequestmanager.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/restCommunicationCore/mrestrequestptr.h",
+                    "target": "milo/mrestapi/restCommunicationCore/mrestrequestptr.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/restCommunicationCore/mrestrequestqueue.cpp",
+                    "target": "milo/mrestapi/restCommunicationCore/mrestrequestqueue.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/restCommunicationCore/mrestrequestqueue.h",
+                    "target": "milo/mrestapi/restCommunicationCore/mrestrequestqueue.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/tst_mrestapi/restapiclient.cpp",
+                    "target": "milo/mrestapi/tst_mrestapi/restapiclient.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/tst_mrestapi/restapiclient.h",
+                    "target": "milo/mrestapi/tst_mrestapi/restapiclient.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/tst_mrestapi/testrequest.cpp",
+                    "target": "milo/mrestapi/tst_mrestapi/testrequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/tst_mrestapi/testrequest.h",
+                    "target": "milo/mrestapi/tst_mrestapi/testrequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/tst_mrestapi/tst_mrestapi.cpp",
+                    "target": "milo/mrestapi/tst_mrestapi/tst_mrestapi.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/tst_mrestapi/tst_mrestapi.pro",
+                    "target": "milo/mrestapi/tst_mrestapi/tst_mrestapi.pro",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/tst_mrestapi/weatherbycitynamerequest.cpp",
+                    "target": "milo/mrestapi/tst_mrestapi/weatherbycitynamerequest.cpp",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mrestapi/tst_mrestapi/weatherbycitynamerequest.h",
+                    "target": "milo/mrestapi/tst_mrestapi/weatherbycitynamerequest.h",
+                    "condition": "%{JS: '%{MRestAPIChB}' === 'MRestAPIChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/doc/branding/milo-doxy-footer.html",
+                    "target": "milo/mscripts/doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/doc/branding/milo-doxy-header.html",
+                    "target": "milo/mscripts/doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/doc/branding/milo-doxygen.css",
+                    "target": "milo/mscripts/doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/doc/branding/milo-doxygen.scss",
+                    "target": "milo/mscripts/doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/doc/branding/milo.js",
+                    "target": "milo/mscripts/doc/branding/milo.js",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/hooks/gitHooksReadme.md",
+                    "target": "milo/mscripts/hooks/gitHooksReadme.md",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/hooks/mclang-format.py",
+                    "target": "milo/mscripts/hooks/mclang-format.py",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/hooks/mclang-tidy.py",
+                    "target": "milo/mscripts/hooks/mclang-tidy.py",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/hooks/mconfig-sample.py",
+                    "target": "milo/mscripts/hooks/mconfig-sample.py",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/hooks/mgit-hooks-installer.py",
+                    "target": "milo/mscripts/hooks/mgit-hooks-installer.py",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/LICENSE-MiloCodeDB.txt",
+                    "target": "milo/mscripts/LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/mobile/build_android_package.sh",
+                    "target": "milo/mscripts/mobile/build_android_package.sh",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/mobile/build_ios_package.sh",
+                    "target": "milo/mscripts/mobile/build_ios_package.sh",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/mscripts.doxyfile",
+                    "target": "milo/mscripts/mscripts.doxyfile",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/mscripts.pri",
+                    "target": "milo/mscripts/mscripts.pri",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/others/mattermost-notification.sh",
+                    "target": "milo/mscripts/others/mattermost-notification.sh",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/README.md",
+                    "target": "milo/mscripts/README.md",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/seafile/delete_from_seafile.sh",
+                    "target": "milo/mscripts/seafile/delete_from_seafile.sh",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/seafile/get_files_from_seafile.sh",
+                    "target": "milo/mscripts/seafile/get_files_from_seafile.sh",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/seafile/upload_to_seafile.ps1",
+                    "target": "milo/mscripts/seafile/upload_to_seafile.ps1",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/seafile/upload_to_seafile.sh",
+                    "target": "milo/mscripts/seafile/upload_to_seafile.sh",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/.gitignore",
+                    "target": "milo/mscripts/version/.gitignore",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/bumpVersion.bat",
+                    "target": "milo/mscripts/version/bumpVersion.bat",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/bumpVersion.sh",
+                    "target": "milo/mscripts/version/bumpVersion.sh",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/incrementVersion.ps1",
+                    "target": "milo/mscripts/version/incrementVersion.ps1",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/replaceString.ps1",
+                    "target": "milo/mscripts/version/replaceString.ps1",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/version.bat",
+                    "target": "milo/mscripts/version/version.bat",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/version.cpp",
+                    "target": "milo/mscripts/version/version.cpp",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/version.h",
+                    "target": "milo/mscripts/version/version.h",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/version.pri",
+                    "target": "milo/mscripts/version/version.pri",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/version.sh",
+                    "target": "milo/mscripts/version/version.sh",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/versiongit.cpp.sample",
+                    "target": "milo/mscripts/version/versiongit.cpp.sample",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/mscripts/version/versionReadme.md",
+                    "target": "milo/mscripts/version/versionReadme.md",
+                    "condition": "%{JS: '%{MScriptsChB}' === 'MScriptsChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/CMakeLists.txt",
+                    "target": "milo/msentry/CMakeLists.txt",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/doc/branding/milo-doxy-footer.html",
+                    "target": "milo/msentry/doc/branding/milo-doxy-footer.html",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/doc/branding/milo-doxy-header.html",
+                    "target": "milo/msentry/doc/branding/milo-doxy-header.html",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/doc/branding/milo-doxygen.css",
+                    "target": "milo/msentry/doc/branding/milo-doxygen.css",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/doc/branding/milo-doxygen.scss",
+                    "target": "milo/msentry/doc/branding/milo-doxygen.scss",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/doc/branding/milo.js",
+                    "target": "milo/msentry/doc/branding/milo.js",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/example-sentry-basic/example-sentry-basic.pro",
+                    "target": "milo/msentry/example-sentry-basic/example-sentry-basic.pro",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/example-sentry-basic/main.cpp",
+                    "target": "milo/msentry/example-sentry-basic/main.cpp",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/example-sentry-full/example-sentry-full.pro",
+                    "target": "milo/msentry/example-sentry-full/example-sentry-full.pro",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/example-sentry-full/main.cpp",
+                    "target": "milo/msentry/example-sentry-full/main.cpp",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/LICENSE",
+                    "target": "milo/msentry/LICENSE",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/LICENSE-MiloCodeDB.txt",
+                    "target": "milo/msentry/LICENSE-MiloCodeDB.txt",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/msentry.cpp",
+                    "target": "milo/msentry/msentry.cpp",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/msentry.doxyfile",
+                    "target": "milo/msentry/msentry.doxyfile",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/msentry.h",
+                    "target": "milo/msentry/msentry.h",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/msentry.pri",
+                    "target": "milo/msentry/msentry.pri",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/raven.cpp",
+                    "target": "milo/msentry/raven.cpp",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/raven.h",
+                    "target": "milo/msentry/raven.h",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/ravendefs.cpp",
+                    "target": "milo/msentry/ravendefs.cpp",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/ravendefs.h",
+                    "target": "milo/msentry/ravendefs.h",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/README.md",
+                    "target": "milo/msentry/README.md",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/tst_msentry/.gitignore",
+                    "target": "milo/msentry/tst_msentry/.gitignore",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/tst_msentry/tst_msentry.cpp",
+                    "target": "milo/msentry/tst_msentry/tst_msentry.cpp",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/msentry/tst_msentry/tst_msentry.pro",
+                    "target": "milo/msentry/tst_msentry/tst_msentry.pro",
+                    "condition": "%{JS: '%{MSentryChB}' === 'MSentryChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/newprojecttemplate.doxyfile",
+                    "target": "%{ProjectName}.doxyfile",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "project.pro",
+                    "target": "%{ProFileName}",
+                    "openAsProject": true
+                },
+                {
+                    "source": "milo/newprojecttemplate/template/platforms/android/android.pri",
+                    "target": "%{ProjectName}/platforms/android/android.pri",
+                    "condition": "%{JS: '%{AndroidChB}' === 'AndroidChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/template/platforms/mac/mac.pri",
+                    "target": "%{ProjectName}/platforms/mac/mac.pri",
+                    "condition": "%{JS: '%{MacChB}' === 'MacChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/template/platforms/windows/windows.pri",
+                    "target": "%{ProjectName}/platforms/windows/windows.pri",
+                    "condition": "%{JS: '%{WindowsChB}' === 'WindowsChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/template/template.pro",
+                    "target": "%{ProjectName}/%{ProjectName}.pro",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/template/qml/qml.qrc",
+                    "target": "%{ProjectName}/qml/qml.qrc",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/template/resources/resources.qrc",
+                    "target": "%{ProjectName}/resources/resources.qrc",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/template/src/globals.h",
+                    "target": "%{ProjectName}/src/globals.h",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/template/src/main.cpp",
+                    "target": "%{ProjectName}/src/main.cpp",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/README.md",
+                    "target": "README.md",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/Release.md",
+                    "target": "Release.md",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/tests/helpers/helpers.pri",
+                    "target": "tests/helpers/helpers.pri",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/tests/helpers/propertyTester.h",
+                    "target": "tests/helpers/propertyTester.h",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/tests/Readme-tests.md",
+                    "target": "tests/Readme-tests.md",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/tests/testConfig.pri",
+                    "target": "tests/testConfig.pri",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/tests/tests.pro",
+                    "target": "tests/tests.pro",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/tests/tst_project/tst_template.cpp",
+                    "target": "tests/tst_%{ProjectName}/tst_%{ProjectName}.cpp",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                },
+                {
+                    "source": "milo/newprojecttemplate/tests/tst_project/tst_project.pro",
+                    "target": "tests/tst_%{ProjectName}/tst_%{ProjectName}.pro",
+                    "condition": "%{JS: '%{NewProjectTemplateChB}' === 'NewProjectTemplateChBChecked'}"
+                }
+            ]
+        }
+    ]
+}
