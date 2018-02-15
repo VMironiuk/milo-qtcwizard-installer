@@ -3,7 +3,7 @@
 ## Overview
 
 The installer installs Milo Code Database as a wizard for the Qt Creator. This means that you can create any projects of Milo Code Database from the Qt Creator.
-Also addition plugin will be installed. This plugin used for pages customization on the Qt Creator wizard.
+Also addition plugin will be installed. This plugin is used for pages customization of the Qt Creator wizard.
 
 
 ### Installation
@@ -45,7 +45,7 @@ On this page you can:
 When you have completed the steps, Qt Creator automatically generates the project with required subprojects, as defined by the wizard and runs selected git operations.
 
 
-### Locating wizard
+### Locating wizard and plugins
 
 Qt Creator searches for wizards in the shared directory and in the local user's settings directory. Therefore the wizard is located in subdirectories of the following directories:
 
@@ -73,7 +73,7 @@ Detailed information about each project template is described [here](https://doc
 ### Building the installer
 
 To build the installer you need to build binarycreator tool from [here](https://github.com/VMironiuk/installer-framework.git) first. This version of the binarycreator contains some additional operations which are necessary for the proper work of the installer. [README.md](https://github.com/VMironiuk/installer-framework/blob/master/README) file contains detailed instruction how to build Qt Installer Framework, with useful tools such as binarycreator, from sources.
-When the binarycreator will be built, get libMilo.so (Milo.dll) files from [here](TODO: add ref) then put this files into, for example, milo-qtcwizard-installer/packages/com.milosolutions.milo.plugins.4.5.1/data/4.5.1, directory for version of the Qt Creator 4.5.1 (do the same for other versions).
+When the binarycreator will be built, get *libMilo.so* (*Milo.dll*) files from [here](TODO: add ref) then put this files into, for example, milo-qtcwizard-installer/packages/com.milosolutions.milo.plugins.4.5.1/data/4.5.1, directory for version of the Qt Creator 4.5.1 (do the same for other versions).
 After all go to the root directory of this repository (it's must be milo-qtcreator-wizard-installer directory, if you didn't change the name during cloning) and enter command:
 ```
 PATH_TO_YOUR_BINARYCREATOR/binarycreator -c config/config.xml -p packages MiloInstaller
