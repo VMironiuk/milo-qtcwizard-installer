@@ -39,8 +39,10 @@ Component.prototype.createOperations = function()
 
         if (systemInfo.kernelType == "winnt") {
             deployOnWindows();
+        } else if (systemInfo.kernelType == "linux") {
+            deployOnLinux();
         } else {
-            deployOnNix();
+            deployOnMac();
         }
     } catch (e) {
         console.log(e);
@@ -74,29 +76,29 @@ function deployOnWindows()
     component.addOperation("Rmdir", dirToRemove);
 }
 
-function deployOnNix()
+function deployOnLinux()
 {
-    var targetPath;
-
-    // specify target directory for Linux OS
-    if (systemInfo.kernelType == "linux") {
-        targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
+    // specify target directory
+    var targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
                 + "/.local/share/data/QtProject/qtcreator/plugins/4.5.1";
-
-    // specify target directory for Mac OS
-    } else if (systemInfo.kernelType == "darwin") {
-        targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-                + "/Library/Application Support/QtProject/Qt Creator/plugins/4.5.1";
-
-    // something wrong
-    } else {
-        console.log("Cannot fetch correct target path.");
-        return;
-    }
-
     var dirToRemove = "@TargetDir@/4.5.1";
     var sourceFile = "@TargetDir@/4.5.1/libMilo.so";
     var targetFile = targetPath + "/libMilo.so";
+
+    // do deployment
+    component.addOperation("Mkdir", targetPath);
+    component.addOperation("Move", sourceFile, targetFile);
+    component.addOperation("Rmdir", dirToRemove);
+}
+
+function deployOnMac()
+{
+    // specify target directory
+    var targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
+                + "/Library/Application Support/QtProject/Qt Creator/plugins/4.5.1";
+    var dirToRemove = "@TargetDir@/4.5.1";
+    var sourceFile = "@TargetDir@/4.5.1/libMilo.dylib";
+    var targetFile = targetPath + "/libMilo.dylib";
 
     // do deployment
     component.addOperation("Mkdir", targetPath);
