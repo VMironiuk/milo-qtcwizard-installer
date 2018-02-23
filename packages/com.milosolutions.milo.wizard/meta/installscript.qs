@@ -40,16 +40,18 @@ Component.prototype.isDefault = function()
 Component.prototype.createOperations = function()
 {
     try {
-        // call the base create operations function
+        // Call default implementation of create operations function.
+        // The default implementation calls createOperationsForArchive()
+        // for all archives in this component.
         component.createOperations();
-
-        // registered custom operation
+        
+        // Registered custom operation.
         component.addOperation(
-            "ReplaceAll",  // operation
-            "@TargetDir@", // target dir
-            "\\",          // before
-            "\\\\",        // after
-            "*.cpp",       // name filters
+            "ReplaceAll",           // operation
+            componentLocation(),    // target dir
+            "\\",                   // before
+            "\\\\",                 // after
+            "*.cpp",                // name filters
             "*.h",
             "*.pro",
             "*.pri",
@@ -77,4 +79,20 @@ Component.prototype.createOperations = function()
     } catch (e) {
         console.log(e);
     }
+}
+
+Component.prototype.createOperationsForArchive = function(archive)
+{
+    component.addOperation("Extract", archive, componentLocation());
+}
+
+function componentLocation()
+{
+    var defaultLocation = systemInfo.productType == "windows"
+        ? QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
+            + "/AppData/Roaming/QtProject/qtcreator/templates/wizards/milo-project-templates"
+        : QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
+            + "/.config/QtProject/qtcreator/templates/wizards/milo-project-templates";
+    
+    return defaultLocation;
 }

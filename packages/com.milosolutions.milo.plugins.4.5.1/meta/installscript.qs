@@ -31,77 +31,31 @@ function Component()
     // constructor
 }
 
-Component.prototype.createOperations = function()
+Component.prototype.createOperationsForArchive = function(archive)
 {
-    try {
-        // call the base create operations function
-        component.createOperations();
-
-        if (systemInfo.kernelType == "winnt") {
-            deployOnWindows();
-        } else if (systemInfo.kernelType == "linux") {
-            deployOnLinux();
-        } else {
-            deployOnMac();
-        }
-    } catch (e) {
-        console.log(e);
+    if (systemInfo.kernelType == "winnt") {
+        component.addOperation("Extract", archive, windowsComponentLocation());
+    } else if (systemInfo.kernelType == "linux") {
+        component.addOperation("Extract", archive, linuxComponentLocation());
+    } else {
+        component.addOperation("Extract", archive, macComponentLocation());
     }
 }
 
-function deployOnWindows()
+function windowsComponentLocation()
 {
-    // prepare locations
-    var targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-            + "/AppData/Local/QtProject/qtcreator/plugins/4.5.1";
-
-    var targetDllFile = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-            + "/AppData/Local/QtProject/qtcreator/plugins/4.5.1/Milo4.dll";
-    var targetExpFile = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-            + "/AppData/Local/QtProject/qtcreator/plugins/4.5.1/Milo4.exp";
-    var targetLibFile = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-            + "/AppData/Local/QtProject/qtcreator/plugins/4.5.1/Milo4.lib";
-
-    var sourceDllFile = "@TargetDir@/4.5.1/Milo4.dll";
-    var sourceExpFile = "@TargetDir@/4.5.1/Milo4.exp";
-    var sourceLibFile = "@TargetDir@/4.5.1/Milo4.lib";
-
-    var dirToRemove = "@TargetDir@/4.5.1";
-
-    // do deployment
-    component.addOperation("Mkdir", targetPath);
-    component.addOperation("Move", sourceDllFile, targetDllFile);
-    component.addOperation("Move", sourceExpFile, targetExpFile);
-    component.addOperation("Move", sourceLibFile, targetLibFile);
-    component.addOperation("Rmdir", dirToRemove);
+    return QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
+            + "/AppData/Local/QtProject/qtcreator/plugins";
 }
 
-function deployOnLinux()
+function linuxComponentLocation()
 {
-    // specify target directory
-    var targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-                + "/.local/share/data/QtProject/qtcreator/plugins/4.5.1";
-    var dirToRemove = "@TargetDir@/4.5.1";
-    var sourceFile = "@TargetDir@/4.5.1/libMilo.so";
-    var targetFile = targetPath + "/libMilo.so";
-
-    // do deployment
-    component.addOperation("Mkdir", targetPath);
-    component.addOperation("Move", sourceFile, targetFile);
-    component.addOperation("Rmdir", dirToRemove);
+    return QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
+            + "/.local/share/data/QtProject/qtcreator/plugins";
 }
 
-function deployOnMac()
+function macComponentLocation()
 {
-    // specify target directory
-    var targetPath = QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
-                + "/Library/Application Support/QtProject/Qt Creator/plugins/4.5.1";
-    var dirToRemove = "@TargetDir@/4.5.1";
-    var sourceFile = "@TargetDir@/4.5.1/libMilo.dylib";
-    var targetFile = targetPath + "/libMilo.dylib";
-
-    // do deployment
-    component.addOperation("Mkdir", targetPath);
-    component.addOperation("Move", sourceFile, targetFile);
-    component.addOperation("Rmdir", dirToRemove);
+    return QDesktopServices.storageLocation(QDesktopServices.HomeLocation)
+            + "/Library/Application Support/QtProject/Qt Creator/plugins";
 }
