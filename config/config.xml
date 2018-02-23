@@ -8,7 +8,7 @@
     <InstallerApplicationIcon>icon</InstallerApplicationIcon>
     <Logo>logo-transparent-small.png</Logo>
     <ControlScript>controller.js</ControlScript>
-    <AllowSpaceInPath>false</AllowSpaceInPath>
+    <AllowSpaceInPath>true</AllowSpaceInPath>
     <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
     <WizardStyle>Modern</WizardStyle>
     <TargetDir>@HomeDir@/Milo/qtcwizard</TargetDir>
