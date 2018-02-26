@@ -1,17 +1,8 @@
 function Controller()
 {
-    hideUnnecessaryPages();
-	
-    if (systemInfo.productType === "windows")
-        updateTargetDirForWindows();
-}
-
-function hideUnnecessaryPages()
-{
     installer.setDefaultPageVisible(QInstaller.StartMenuSelection, false);
-}
-
-function updateTargetDirForWindows()
-{
-    installer.setValue("TargetDir", "@ApplicationsDirX86@/Milo/qtcwizard/");
+    
+    // Update target dir for Windows
+    if (systemInfo.productType === "windows")
+        installer.setValue("TargetDir", "@ApplicationsDirX86@/Milo/qtcwizard/");
 }
