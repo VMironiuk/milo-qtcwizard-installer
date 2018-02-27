@@ -11,6 +11,6 @@
     <AllowSpaceInPath>true</AllowSpaceInPath>
     <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
     <WizardStyle>Modern</WizardStyle>
-    <TargetDir>@HomeDir@/Milo/qtcwizard</TargetDir>
-    <MaintenanceToolName>Updater</MaintenanceToolName>
+    <TargetDir>@HomeDir@/Milo/QtCWizard</TargetDir>
+    <MaintenanceToolName>MiloQtCWizardUpdater</MaintenanceToolName>
 </Installer>

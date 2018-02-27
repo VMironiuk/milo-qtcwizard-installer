@@ -1,3 +1,5 @@
+[TOC]
+
 # Installer for Milo Qt Creator wizard
 
 ## Overview
